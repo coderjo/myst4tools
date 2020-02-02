@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
 
 import base64
+import bz2
 import m4bfile
 import os.path
 import os
 
-blankfile = base64.b64decode(b'QklLaYQAAAABAAAAWAAAAAEAAAAIAAAACAAAAA8AAAABAAAAAAAAAAAAAAA1AAAAjAAAACAAAAAAAAAAAAAAAAAAABAAAxDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAMQQAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAADEEAEAAAAAAAAAAAAAAA=')
+# Bink file with a single 8x8 frame of black
+black8by8 = bz2.decompress(base64.b64decode(b'QlpoOTFBWSZTWc26gagAACZ/RGzQ2ABAAAIAUCgAQAAgBARAACAAVFGjIGjTI0EpqnpHqAPJGifhY2v9BG+SRh5dgO2TAUIaaqWs1QK/tvOBfF3JFOFCQzbqBqA='))
 
 
 filestoblank = [
@@ -53,7 +55,7 @@ for k in pakfiles:
 for fn in filestoblank:
 	print("Replacing " + fn)
 	with open(fn, "wb") as f:
-		f.write(blankfile)
+		f.write(black8by8)
 		
 
 os.makedirs(destdir, exist_ok=True)
