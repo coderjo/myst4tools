@@ -7,7 +7,7 @@ import os.path
 import os
 
 # Bink file with a single 8x8 frame of black
-black8by8 = bz2.decompress(base64.b64decode(b'QlpoOTFBWSZTWc26gagAACZ/RGzQ2ABAAAIAUCgAQAAgBARAACAAVFGjIGjTI0EpqnpHqAPJGifhY2v9BG+SRh5dgO2TAUIaaqWs1QK/tvOBfF3JFOFCQzbqBqA='))
+black8by8 = bz2.decompress(base64.b64decode(b'QlpoOTFBWSZTWUsjWKwAACV/TGzYWABAAAIAUCgAQAQgBAQCAEAAIABURAANAyZBJKPUDRoPKMkPw15+zNKYK2PjukcsHSZAQMi8TMLJTqN76AIrgl8XckU4UJBLI1is'))
 
 
 filestoblank = [
