@@ -42,9 +42,11 @@ class m4b_filerecord:
 		
 	def Write(self, f, offset, filestowrite, parentpath):
 		m4b_WriteString(f, self.filename)
-		self.offset = offset
-		offset += self.length
-		filestowrite.append(self.realfile)
+		if len(filestowrite) > 0:
+			self.offset = filestowrite[-1][1]
+		else:
+			self.offset = offset
+		filestowrite.append( (self.realfile, self.offset + self.length) )
 		f.write(pack("<II", self.length, self.offset))
 		
 	def RecordLen(self):
@@ -97,7 +99,6 @@ class m4b_directoryrecord:
 		f.write(pack("<I", len(self.files)))
 		for fil in self.files:
 			fil.Write(f, startoffs, filestowrite, parentpath)
-			startoffs += fil.length
 			
 	def RecordLen(self):
 		val = 0
@@ -184,7 +185,7 @@ class m4b_file:
 		filestowrite = []
 		self.rootdir.Write(f, startoffs, filestowrite)
 		for fil in filestowrite:
-			with open(fil, "rb") as sf:
+			with open(fil[0], "rb") as sf:
 				copyfileobj(sf, f)
 	
 	
